@@ -1,0 +1,27 @@
+{
+  "short_name": "Hello",
+  "name": "Hello",
+  "description": "An Hello World! example",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/maxence-charriere/go-app/ae91dad21cd8c0f7cd97b3e55bf1a644f9f434f1/docs/web/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/maxence-charriere/go-app/master/docs/web/icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/maxence-charriere/go-app/master/docs/web/icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "scope": "/goappdemo/",
+  "start_url": "/goappdemo/",
+  "background_color": "#2d2c2c",
+  "theme_color": "#2d2c2c",
+  "display": "standalone"
+}
