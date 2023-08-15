@@ -41,9 +41,11 @@ async function goappInitServiceWorker() {
 // Update
 // -----------------------------------------------------------------------------
 function goappWatchForUpdate() {
+  console.log("app.js goappWatchForUpdate()")
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    console.log("app.js goappWatchForUpdate() beforeinstallprompt deferredPrompt = ", deferredPrompt)
     goappOnAppInstallChange();
   });
 }
