@@ -1,14 +1,21 @@
 // -----------------------------------------------------------------------------
 // go-app
 // -----------------------------------------------------------------------------
-console.log("app.js: entry")
+var log = function (msg) {  log("app.js: " + msg) }
 
-var goappNav = function () {console.log("app.js : goappNav stub called")};
-var goappOnUpdate = function () {console.log("app.js : goappOnUpdate stub called")};
-var goappOnAppInstallChange = function () {console.log("app.js : goappOnAppInstallChange stub called")};
+log("entry")
+
+var goappNav = function () { log("goappNav stub called") };
+var goappOnUpdate = function () { log("goappOnUpdate stub called") };
+var goappOnAppInstallChange = function () { log("goappOnAppInstallChange stub called") };
 var goappHandlersSet = false;
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"f7c4b6e38f65eb8abe8f8f5961348ad289ead1ce"};
+const until = (predFn) => {
+  const poll = (done) => (predFn() ? done() : setTimeout(() => poll(done), 50));
+  return new Promise(poll);
+};
+
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"6aa954708d1dbfc65db9feb4becc62285bcfb518"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
@@ -16,11 +23,12 @@ let goappServiceWorkerRegistration;
 let deferredPrompt = null;
 
 goappInitServiceWorker();
-goappWatchForUpdate();
 goappInitWebAssembly();
-goappWatchForInstallable();
+await until(() => { return goappHandlersSet === true });
 
-console.log("app.js: exit")
+goappWatchForUpdate();
+goappWatchForInstallable();
+log("exit")
 
 // -----------------------------------------------------------------------------
 // Service Worker
@@ -46,11 +54,11 @@ async function goappInitServiceWorker() {
 // Update
 // -----------------------------------------------------------------------------
 function goappWatchForUpdate() {
-  console.log("app.js: goappWatchForUpdate()")
+  log("goappWatchForUpdate()")
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.log("app.js: goappWatchForUpdate() beforeinstallprompt deferredPrompt = ", deferredPrompt)
+    log("goappWatchForUpdate() beforeinstallprompt deferredPrompt = ", deferredPrompt)
     goappOnAppInstallChange();
   });
 }
@@ -88,9 +96,9 @@ function goappSetupAutoUpdate(registration) {
 // Install
 // -----------------------------------------------------------------------------
 function goappWatchForInstallable() {
-  console.log("app.js: goappWatchForInstallable()")
+  log("goappWatchForInstallable()")
   window.addEventListener("appinstalled", () => {
-    console.log("app.js: goappWatchForInstallable() event appinstalled")
+    log("goappWatchForInstallable() event appinstalled")
     deferredPrompt = null;
     goappOnAppInstallChange();
   });
@@ -229,6 +237,7 @@ async function goappInitWebAssembly() {
       go.importObject
     );
 
+    log("go.run(wasm.instance)")
     go.run(wasm.instance);
     loader.remove();
   } catch (err) {
