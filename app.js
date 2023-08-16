@@ -1,7 +1,7 @@
 // -----------------------------------------------------------------------------
 // go-app
 // -----------------------------------------------------------------------------
-var log = function (msg) {  log("app.js: " + msg) }
+var log = function (msg) {  console.log("app.js: " + msg) }
 
 log("entry")
 
@@ -10,7 +10,7 @@ var goappOnUpdate = function () { log("goappOnUpdate stub called") };
 var goappOnAppInstallChange = function () { log("goappOnAppInstallChange stub called") };
 var goappHandlersSet = false;
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"d35e22d7b53f23a7259b49c551494608e1db2944"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"78d8dddbb5af5643136a2d9bef903d4aa90ed90f"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
