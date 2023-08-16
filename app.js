@@ -7,7 +7,7 @@ var goappNav = function () {console.log("app.js : goappNav stub called")};
 var goappOnUpdate = function () {console.log("app.js : goappOnUpdate stub called")};
 var goappOnAppInstallChange = function () {console.log("app.js : goappOnAppInstallChange stub called")};
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"b17637619993547185a1c063b6af22e64d44e2d3"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"276cdc2d2303915319afd7fb26ebf49bb02273e3"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
