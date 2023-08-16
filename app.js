@@ -1,11 +1,13 @@
 // -----------------------------------------------------------------------------
 // go-app
 // -----------------------------------------------------------------------------
-var goappNav = function () {};
-var goappOnUpdate = function () {};
-var goappOnAppInstallChange = function () {};
+console.log("app.js entry")
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"703cd4484269b2721fff42bcfb4de1be0f629445"};
+var goappNav = function () {console.log("app.js : goappNav stub called")};
+var goappOnUpdate = function () {console.log("app.js : goappOnUpdate stub called")};
+var goappOnAppInstallChange = function () {console.log("app.js : goappOnAppInstallChange stub called")};
+
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"b17637619993547185a1c063b6af22e64d44e2d3"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
@@ -16,6 +18,8 @@ goappInitServiceWorker();
 goappWatchForUpdate();
 goappWatchForInstallable();
 goappInitWebAssembly();
+
+console.log("app.js exit")
 
 // -----------------------------------------------------------------------------
 // Service Worker
@@ -83,7 +87,9 @@ function goappSetupAutoUpdate(registration) {
 // Install
 // -----------------------------------------------------------------------------
 function goappWatchForInstallable() {
+  console.log("app.js: goappWatchForInstallable()")
   window.addEventListener("appinstalled", () => {
+    console.log("app.js: goappWatchForInstallable() event appinstalled")
     deferredPrompt = null;
     goappOnAppInstallChange();
   });
