@@ -10,7 +10,7 @@ var goappOnUpdate = function () { log("goappOnUpdate stub called") };
 var goappOnAppInstallChange = function () { log("goappOnAppInstallChange stub called") };
 var goappHandlersSet = false;
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"1115029817da363ad60c39112562f59a0b9e2234"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"add2ac364ca020b509de925df189eb7d181ffa05"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
@@ -18,19 +18,9 @@ let goappServiceWorkerRegistration;
 let deferredPrompt = null;
 
 goappInitServiceWorker();
+goappWatchForUpdate();
+goappWatchForInstallable();
 goappInitWebAssembly();
-
-function checkFlag() {
-  if(!goappHandlersSet) {
-    log("goappHandlersSet is false, re-checking")
-    window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
-  } else {
-    log("goappHandlersSet is true, continuing")
-    goappWatchForUpdate();
-    goappWatchForInstallable();
-  }
-}
-checkFlag();
 log("exit")
 
 // -----------------------------------------------------------------------------
