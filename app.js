@@ -10,7 +10,7 @@ var goappOnUpdate = function () { log("goappOnUpdate stub called") };
 var goappOnAppInstallChange = function () { log("goappOnAppInstallChange stub called") };
 var goappHandlersSet = false;
 
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"405cf6a725e883b66e141cb31c0ccce6c96ef923"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"1115029817da363ad60c39112562f59a0b9e2234"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
@@ -37,6 +37,7 @@ log("exit")
 // Service Worker
 // -----------------------------------------------------------------------------
 async function goappInitServiceWorker() {
+  log("goappInitServiceWorker()");
   if ("serviceWorker" in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(
@@ -210,6 +211,7 @@ function goappKeepBodyClean() {
 // Web Assembly
 // -----------------------------------------------------------------------------
 async function goappInitWebAssembly() {
+  log("goappInitWebAssembly()");
   const loader = document.getElementById("app-wasm-loader");
 
   if (!goappCanLoadWebAssembly()) {
