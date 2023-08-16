@@ -10,12 +10,7 @@ var goappOnUpdate = function () { log("goappOnUpdate stub called") };
 var goappOnAppInstallChange = function () { log("goappOnAppInstallChange stub called") };
 var goappHandlersSet = false;
 
-const until = (predFn) => {
-  const poll = (done) => (predFn() ? done() : setTimeout(() => poll(done), 50));
-  return new Promise(poll);
-};
-
-const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"6aa954708d1dbfc65db9feb4becc62285bcfb518"};
+const goappEnv = {"GOAPP_INTERNAL_URLS":"null","GOAPP_ROOT_PREFIX":"/goappdemo","GOAPP_STATIC_RESOURCES_URL":"/goappdemo","GOAPP_VERSION":"d35e22d7b53f23a7259b49c551494608e1db2944"};
 const goappLoadingLabel = "{progress}%";
 const goappWasmContentLengthHeader = "";
 
@@ -24,10 +19,15 @@ let deferredPrompt = null;
 
 goappInitServiceWorker();
 goappInitWebAssembly();
-await until(() => { return goappHandlersSet === true });
 
-goappWatchForUpdate();
-goappWatchForInstallable();
+function checkFlag() {
+  if(!goappHandlersSet) {
+    window.setTimeout(checkFlag, 100); /* this checks the flag every 100 milliseconds*/
+  } else {
+    goappWatchForUpdate();
+    goappWatchForInstallable();
+  }
+}
 log("exit")
 
 // -----------------------------------------------------------------------------
